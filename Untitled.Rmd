@@ -70,3 +70,32 @@ library(googlesheets4)
 ss <- as_sheets_id(`出席狀況表單網址`)
 homework_sheet <- sheets_read(ss,sheet=1)
 ```
+
+
+```{r}
+num1<-5 # 非整數
+num2<-5L # 整數
+
+num1Vector<-c(5,6,7)
+num2Vector<-c(5L,6L,7L)
+```
+```{r}
+class(num)
+class(int)
+class(char)
+class(logi)
+```
+
+```{r}
+
+browseURL("https://docs.google.com/spreadsheets/d/1EAG49qDKPWWi0ebkVr29TLrvVnoBPfkvxYY-J3xLAHY/edit#gid=458686645")
+```
+```{r}
+library(lubridate)
+```
+
+```{r}
+studentTime <- c(
+  ymd_hms('2020-03-04T06:56:29Z')
+  ymd_hms(c(2020-03-11 14:16:43,2020-03-11 14:34:33)tz=asia/taipei)
+```
