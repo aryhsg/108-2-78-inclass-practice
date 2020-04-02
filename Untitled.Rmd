@@ -126,3 +126,15 @@ class(majors10_factor)
 majors10_char
 majors10_factor
 
+
+
+```{r}
+listeample <- li
+```{r}
+ # 用vector儲存
+c("2020/03/21T13:40:55Z","一方","2","水果茶")
+ # 用list儲存
+library(lubridate)
+list("2020/03/21T13:40:55Z","一方","2",'水果茶') #date/time #charater #numertic #charater
+```
+
