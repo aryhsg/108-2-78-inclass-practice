@@ -78,8 +78,6 @@ num2<-5L # 整數
 
 num1Vector<-c(5,6,7)
 num2Vector<-c(5L,6L,7L)
-```
-```{r}
 class(num)
 class(int)
 class(char)
@@ -102,7 +100,7 @@ my_age-> `我的年紀`
 a <- 15 # 變數設定
 b <- a # 呼叫a的值，用來設定變數b的值，相當於 b <- 15
 ```{r}
-number<- 20
+number= 20
 class(number)
 typeof(number)
 ```
@@ -169,10 +167,7 @@ print('小明108學年課表B')
 
 ```{r}
 # list含兩個lists, 子層list又各含兩個vectors
-'小明108學年課表C' <- list(
-  list(
-    c("108-1"), # 可只寫 "108-1"
-    c("高級會計學","高等統計學")
+'小明108學年課表C' <- list(list(c("108-1"), c("高級會計學","高等統計學")# 可只寫 "108-1
        ),
   list(
     c("108-2"),
@@ -210,19 +205,48 @@ list(name='emilyluckey',
 ```
 
 ```{r}
-'小明' <- list(
-  '108-1'<-list('個經'=list('85'),'總經'=list('73'))
-  
-  
-  
-  
-  
+'小明'=list(
+course1 = list(name='alice',course=c('個體經濟學'),score=c(85),name='mark',course=c('總體經濟學'),score=c(73)),
+course2 = list(name='jason',course=c('作業研究'),score=c(90))
 )
+  
+
 ```
 
 
+```{r}
+'天氣預報' <-list(
+  '台北市' = list(
+    date = c(
+      today = "2020-03-31", 
+      tomorrow = "2020-04-01"
+    ), 
+    highest = 25, 
+    lowest = 18
+  ), 
+  '新北市' = list(
+    date = c(
+      today = "2020-03-31", 
+      tomorrow = "2020-04-01"
+    ), 
+    higest = 24, 
+    lowest = 15
+  )
+)
+print('天氣預報')
+```
+```{r}
+list(
+  '20200331' =list(
+  '台北市',high=25,low=18,'新北市',high=24,low=15
+  ),
+  '20200401' =list(
+  '台北市',high=25,low=18,'新北市',high=24,low=15
+  )
+)
 
 
+```
 
 
 
