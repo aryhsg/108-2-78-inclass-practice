@@ -297,9 +297,47 @@ tainanSportsMap[[1]]
 tainanSportsMap[[230]]
 
 ```
+```{r}
+# 有多少名字可選：
+names(listExample)
+```
+```{r}
+listExample$student
+listExample$`學期` # 特殊命名依然要用反頓點呼叫
+```
 
+```{r}
+str(listExample$學期)
+```
 
+```{r}
+listExample[["student"]] #兩種方法叫出特定位置
+listExample$student
 
+listExample[["學期"]] # 小心不是反頓點喔。
+listExample$`學期`
+```
+```{r}
+fromJSON("http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000157-002",
+         simplifyDataFrame = F) -> newTaipeiCityVaccine
+```
+```{r}
+length(newTaipeiCityVaccine)
+str(newTaipeiCityVaccine$success)                 #三種叫出特定位置的方法
+str(newTaipeiCityVaccine[[1]])
+str(newTaipeiCityVaccine[["success"]])
+```
+```{r}
+vectorExample
+vectorExample[c(1,3)]
+vectorExample[c(3,2,1)] # 產生重新排列效果
+```
+```{r}
+# 顯示到第一層
+str(listExample, max.level=1)
 
+listExample[c("學期")]
+listExample[c("student","學期")]
+```
 
 
