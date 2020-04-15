@@ -393,6 +393,60 @@ econ0nly<- list(majors[c(1,2,5)],names[c(1,2,5)],gender[c(1,2,5)])
 econFemaleOnly<- gender[c(1,2)]
 ```
 
+```{r}
+str(listExample)
+```
+```{r}
+listExample[[1]]
+listExample[['student']]
+listExample$student
+```
+
+```{r}
+listExample[['學期']]    #拿出來
+listExample$學期         #拿出來
+```
+
+```{r}
+listExample['學期']     #只留下
+```
+
+```{r}
+str(get1)
+get1<- listExample[["學期"]]
+get1[["108-1"]]->get1_layer1
+get1_layer1[[1]]->get1_layer2
+get1_layer2$teacher
+
+listExample$學期$'108-1'[[1]][['teacher']]  #上面步驟合在一起
+```
+
+```{r}
+get2<-listExample['學期'];get2
+get2_layer1<-get2[[1]];get2_layer1
+get2_layer2<-get2_layer1[['108-1']]
+get2_layer3<-get2_layer2[[1]]
+get2_layer3$teacher
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
