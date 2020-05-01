@@ -723,11 +723,22 @@ sum(list_victimAges_female$數目[pick_above30], na.rm = T)
 ```
 
 ```{r}
+print(example[c("name","bloodType")])
 
+pick_bloodB <- example$bloodType == "B"
+example$name[pick_bloodB]
 ```
+==: 等於
+
+!=: 不等於
+
+==與!=可使用於字串
+
 
 ```{r}
-
+sequenceNums <- c(11, 6, 8, 11, 12, 11, 3, 7, 10, 8)
+pick_evens<- (sequenceNums %% 2)==0
+sequenceNums[pick_evens]
 ```
 
 ```{r}
