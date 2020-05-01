@@ -807,47 +807,78 @@ R還有一種特別的缺失資料NaN (即not a number)，出現在沒有定義�
 ```
 
 ```{r}
+list_victimAges_female$數目 <- as.integer(list_victimAges_female$數目)
+pick_na <- is.na(list_victimAges_female$數目)
+total_na <- sum(pick_na)
+print(total_na)
+```
+4.4.5 字元偵測
 
+stringr::str_detect()
+example裡誰喜歡美食
+```{r}
+print(example[c("name","hobby")])
+
+pick_loveFood <- stringr::str_detect(example$hobby,"美食")
+example$name[pick_loveFood]
+```
+常有同學會有以下錯誤寫法:   == 字串內容一模一樣。
+```{r}
+pick_loveFood <- example$hobby == "美食"
+```
+str_detect 字串內容有關鍵字。
+```{r}
+example[["hobby2"]] <- c("美食", "時尚", "美食", "旅遊")
+
+print(example[c("name", "hobby2")])
+pick_loveFood2 <- example$hobby2 == "美食"
+example$name[pick_loveFood2]
+```
+正確寫法
+```{r}
+print(example[c("name","hobby")])
+
+pick_loveFood <- stringr::str_detect(example$hobby,"美食")
+example$name[pick_loveFood]
 ```
 
 ```{r}
-
+jsonlite::fromJSON("https://data.ntpc.gov.tw/od/data/api/EDC3AD26-8AE7-4916-A00B-BC6048D19BF8?$format=json") ->
+  garbageRoutes
 ```
 
 ```{r}
-
+#  1 用typeof()函數查詢電腦實質上如何看待garbageRoutes。
+typeof(garbageRoutes)  
+#  2 用class()函數查詢電腦把它能進行的操作運算歸屬於哪一類型。
+class(garbageRoutes)
 ```
 
 ```{r}
-
+# 由linename元素判斷垃圾車有幾條路線。
+factor(garbageRoutes$linename) -> garbageRoutes$linename
+levels(garbageRoutes$linename)
+  
+# 由linename創造： 可篩選出下午路線的「要/不要」向量pick_afternoonRoutes。
+pick_afternoonRoutes <-
+  stringr::str_detect(
+    garbageRoutes$linename,
+    "下午"
+  )
+garbageRoutes$linename[pick_afternoonRoutes]
+```
+4.4.5.1 閱讀函數說明
+```{r}
+?str_detect
 ```
 
 ```{r}
-
+CDC_chatbox <- readr::read_csv("http://od.cdc.gov.tw/pr/CDC_chatbox.csv")
 ```
 
 ```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
+pick_pneumonia<- stringr::str_detect(CDC_chatbox$Question,'肺炎')
+CDC_chatbox$Question[pick_pneumonia]
 ```
 
 ```{r}
