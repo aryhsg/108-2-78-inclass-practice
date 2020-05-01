@@ -740,6 +740,99 @@ sequenceNums <- c(11, 6, 8, 11, 12, 11, 3, 7, 10, 8)
 pick_evens<- (sequenceNums %% 2)==0
 sequenceNums[pick_evens]
 ```
+%in%: 屬於
+
+左邊元素「一一」檢視是不是屬於右邊元素集合。
+```{r}
+x <- c(1,5,8)
+y <- c(5,8)
+
+# x裡的元素值是不是屬於y集合
+x %in% y
+```
+
+```{r}
+print(example[c("name","residence")])
+
+set_TaipeiMetro <- c("Taipei","New Taipei")
+pick_fromTaipeiMetro <- example$residence %in% set_TaipeiMetro
+example$name[pick_fromTaipeiMetro]
+```
+
+```{r}
+str(transcript100to103)
+set_lawbusiness<-c('法學院','商學院')
+pick_lawbusiness<-transcript100to103$學院 %in% set_lawbusiness
+pick_lawbusiness
+```
+unique() = 可取出重複出現物件之選項 例：法 商 社 文 法 法 文 商 會選出法商社文
+
+在「要/不要」向量前加上!會成為否定句的「要/不要」向量，元素裡的TRUE會轉成FALSE, FALSE則轉成TRUE。
+```{r}
+pick_not_fromTaipeiMetro <- ! pick_fromTaipeiMetro
+# 或
+pick_not_fromTaipeiMetro <- !(example$residence %in% set_TaipeiMetro) # (..) 裡面會先運算完才做外面!的處理
+```
+
+```{r}
+print(example[c("name","residence")])
+
+example$name[pick_fromTaipeiMetro]
+example$name[pick_not_fromTaipeiMetro]
+```
+is.na: 有缺失
+
+is.{class/type name}: is.integer, is.character, is.factor … etc
+```{r}
+x2 <- c(1,NA,10)
+y2 <- c(-1,NA,20)
+
+x3 <- c(NA,"小花")
+y3 <- c(NA,"小華")
+```
+前述的關係判斷遇到NA時，結果都會是NA——即無法判斷。要知道向量內各元素值是否NA，可使用is.na():
+```{r}
+is.na(x2)
+```
+example裡誰沒有體重資料
+```{r}
+print(example[c("name","weight")])
+
+pick_na <- is.na(example$weight)
+example$name[pick_na]
+```
+R還有一種特別的缺失資料NaN (即not a number)，出現在沒有定義的數學運算上，如：
+```{r}
+0/0
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
 
 ```{r}
 
@@ -773,45 +866,21 @@ sequenceNums[pick_evens]
 
 ```
 
+```{r}
 
+```
 
+```{r}
 
+```
 
+```{r}
 
+```
 
+```{r}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 
 
