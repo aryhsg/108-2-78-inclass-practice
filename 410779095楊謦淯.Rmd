@@ -608,6 +608,7 @@ example <- list(
 
 ```{r}
 str(example[c("name","height")])
+example$name[c(T, F, T, F)]
 
 pick_above170 <- example$height >= 170
 c(175,166,170,160)>=170
@@ -880,7 +881,7 @@ CDC_chatbox <- readr::read_csv("http://od.cdc.gov.tw/pr/CDC_chatbox.csv")
 pick_pneumonia<- stringr::str_detect(CDC_chatbox$Question,'肺炎')
 CDC_chatbox$Question[pick_pneumonia]
 ```
-
+length 函數所顯示的是向量中有幾個元素
 ```{r}
 
 ```
