@@ -1678,7 +1678,7 @@ levels(cities)
 
 ```{R}
 region <- cities
-
+library(stringr)
 # 以下為一連串的pipe operation
 levels(region) -> currentLevels
 str_replace(currentLevels,"台北","北部") -> currentLevels1
@@ -1694,29 +1694,49 @@ levels(region) %>%
   str_replace(.,"台中","中部") ->
   levels(region)
 ```
-
+5.1.4 .省略原則
+若代表中間物件的.在函數的「第一位」則.*可省略不寫，連它後面的,也去掉。小心若不在第一位則不可做省略.動作。
 ```{R}
-
+levels(region) %>%
+  str_replace(.,"台北","北部") %>%
+  str_replace(.,"花蓮|台東","東部") %>%
+  str_replace(.,"台中","中部") ->
+  levels(region)
 ```
-
+可改成
 ```{R}
-
+levels(region) %>% 
+  str_replace("台北","北部") %>%
+  str_replace("花蓮|台東","東部") %>%
+  str_replace("台中","中部") -> 
+  levels(region)
 ```
-
+要小心%>%是將左邊output放到右邊函數，這裡的右邊函數指的是最外圍的函數：
 ```{R}
+# 資料
+population <- c(`cityA`=500,`cityB`=1500, `cityC`=399)
+cities <- c("cityA","cityA","cityB","cityB","cityC")
 
+# 分析步驟
+names(sort(population)) -> setLevels
+factor(cities, levels = setLevels) -> cities 
 ```
-
+分析步驟你可能會寫
 ```{R}
-
+population %>% 
+  names(sort(.)) %>%
+  factor(cities, levels=.) -> cities
 ```
-
+會有誤源自於
 ```{R}
-
+population %>% names(sort(.))
 ```
-
+%>%是把population放到names()的input裡，而非sort()，但names()的input位置已被sort佔走。要改成
 ```{R}
-
+population %>%
+  sort() %>%
+  names() %>%
+  factor(cities, levels=.) -> cities
 ```
 
 ```{R}
