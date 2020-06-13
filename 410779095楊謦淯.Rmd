@@ -2044,7 +2044,10 @@ myDemand2(1.2, intercept=5, slope=-1.2)
 ```
 預設值是「平常不需要動到的彈性arguments」，習慣上定義時最好放在arguments的最後面。
 ```{r}
-
+kevin= function(x){y=x+3
+return(y)
+}
+kevin(3)
 ```
 
 ```{r}
