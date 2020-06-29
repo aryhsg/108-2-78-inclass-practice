@@ -3256,13 +3256,21 @@ get_courses(academicYears[[3]], allGrades[[3]], courseStructure)
 # 103學年 4年級
 get_courses(academicYears[[4]], allGrades[[4]], courseStructure)
 ```
-
+使用pipe
 ```{r}
-
+1 %>% 
+  {get_courses(academicYears[[.]], allGrades[[.]], courseStructure)}
+2 %>% 
+  {get_courses(academicYears[[.]], allGrades[[.]], courseStructure)}
+3 %>% 
+  {get_courses(academicYears[[.]], allGrades[[.]], courseStructure)}
+4 %>% 
+  {get_courses(academicYears[[.]], allGrades[[.]], courseStructure)}
 ```
-
+使用map
 ```{r}
 
+  map(1:4, ~{get_courses(academicYears[[.]], allGrades[[.]], courseStructure)})
 ```
 
 ```{r}
