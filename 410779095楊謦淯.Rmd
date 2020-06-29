@@ -3040,16 +3040,66 @@ map(eggs, ~fryEgg(.x)) -> friedEggs1
 
 map(1:8, ~{fryEgg(eggs[[.]])}) -> friedEggs2
 ```
-
+vectorized function
 ```{r}
+grade <- c(45, 74, NA)
 
+i<-2
+
+grade_i <- grade[[i]]
+if(!is.na(grade_i)){
+  if(grade_i >= 60){
+    "P"
+  } else if(grade_i < 60 ) {
+    "F"
+  }
+} else {
+  "缺考"
+}
 ```
 
 ```{r}
+pass_or_fail <- function(grade_i){
+  if(!is.na(grade_i)){
+    if(grade_i >= 60){
+      "P"
+    } else if(grade_i < 60 ) {
+      "F"
+    }
+  } else {
+    "缺考"
+  }
+}
 
+pass_or_fail(grade[[1]])
+pass_or_fail(grade[[2]])
+pass_or_fail(grade[[3]])
+
+# 可否直接input整個grade vector
+warning("不是vectorised function")
+pass_or_fail(grade)
 ```
+函數使用時若出現output value assigned動作時（即pass_fail_i <-），相當於執行了函數body pass_fail_i <-{...}，依switch小節的{...}處理原則：
+
+若最後一個被執行的指令會產生print在螢幕的效果，則可以用{…}->或<-{…}將這print的值存出來。
+此時可以省略return()。
+
+可:
+
+use map to wrap around non-vectorized function
 
 ```{r}
+grade[[1]] %>% {pass_or_fail(.)}
+grade[[2]] %>% {pass_or_fail(.)}
+grade[[3]] %>% {pass_or_fail(.)}
+
+map(grade, ~{pass_or_fail(.)}) # map to list
+
+map_chr(grade, ~{pass_or_fail(.)}) # map to atom. vectof of class character
+
+map_pass_fail <- function(grade){
+  map_chr(grade, ~{pass_or_fail(.)})
+}
 
 ```
 
