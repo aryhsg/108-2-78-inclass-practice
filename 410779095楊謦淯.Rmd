@@ -3439,35 +3439,102 @@ names(output) <- nameVector
 
 print(output)
 ```
-
+5.4.4 while loop
+有時我們面臨sequence長度未知，如擲一銅板直到出現5次正面才停。
 ```{r}
+sum <- 0
+for(i in 1:10){
+  newToss <- sample(c("正","反"), 1, replace=T)
+  if(newToss == "正"){
+    sum <- sum+1
+  }
+  print(glue::glue("已擲{i}次得到{sum}次正面"))
+}
+```
+for loop用很長的sequence再加上條件式break：
 
+break會完全終止迴圈，而之前學到的next是不執行其以下的body直接跳下一個sequence值。
+```{r}
+sum <- 0
+for(i in 1:100){
+  newToss <- sample(c("正","反"), 1, replace=T)
+  if(newToss == "正"){
+    sum <- sum+1
+  }
+  print(glue::glue("已擲{i}次得到{sum}次正面"))
+  if(sum==5){
+    break
+  }
+}
+```
+while會一直反覆執行body直到conditionCondition為FALSE:
+```{r}
+while(continueCondition){
+  body
+}
 ```
 
 ```{r}
+sum <- 0
+count <- 0 # 計數器
+while(sum<5){
+  count <- count+1 # 計數器+1
+  newToss <- sample(c("正","反"), 1, replace=T)
+  if(newToss == "正"){
+    sum <- sum+1
+  }
+  print(glue::glue("已擲{count}次得到{sum}次正面"))
+}
+```
+由於while並沒有迴圈執行次數上限，若沒設好結束條件程式會一直跑下去鎖死電腦。為避免此問題，一般我們會放計數器，並在條件裡放計數上限，如下方四個#註明位置：
 
+```{r}
+count <- 0 # 計數器開始值
+max_count <- 500 # 計數上限
+while(continueCondition && count <= max_count){ # 增加計數上限條件
+  count <- count+1 # 計數器加1
+  body
+}
+```
+之前的（有限）迴圈也可以用while寫：
+```{r}
+set.seed(1000) # 控制sample抽出的數字sequence固定，通常進行方法比對用
+
+output <- c()
+for(.x in 1:10){
+  new <- sample(0:100,1)
+  if(new %% 3==0){
+    output <- c(output, new)
+  }
+}
+
+print(output)
+```
+```{r}
+a <- sample(1:100, 10, replace=T)
+print(a)
+
+sum <- 0
+for(.x in 1:10){ 
+  sum <- sum+a[[.x]]
+}
+
+print(sum)
 ```
 
 ```{r}
+count <- 0 # 計數器起始值
+sum <- 0
+while(count <= 10){ # 計數上限條件
+  count <- count+1 # 計數器+1
+  sum <- sum+a[[count]]
+}
 
+print(sum)
 ```
 
-```{r}
+幾乎每一個iteration都可以用functional, for, while寫一次，but …
 
-```
+“…the real downside of for loops is that they’re very flexible: a loop conveys that you’re iterating, but not what should be done with the results. Just as it’s better to use while than repeat, and it’s better to use for than while (Section 5.3.2), it’s better to use a functional than for. Each functional is tailored for a specific task, so when you recognise the functional you immediately know why it’s being used.” – from Advanced R.
 
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
+不過若沒有追求時間效率的需求，還是以符合直覺的寫法優先，日後維護也比較能進入狀況。
