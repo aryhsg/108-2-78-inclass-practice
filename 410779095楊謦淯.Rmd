@@ -2957,14 +2957,38 @@ if(){ # 條件情境描述
   
 }
 ```
+5.4 Iteration
 
+Rule of thumb: never copy and paste more than twice.
+
+重覆兩次（包含第一個）okay. 三次…考慮一下迴圈吧！
+
+但在設計迴圈時可以copy/paste 3 times來理解body如何設計
+
+找出哪幾筆為“男”：
 ```{r}
-
+sampleData <- list(
+  list("男", 45), list("女", 32), list("男",50), list("男",33), list("女", 21)
+)
 ```
-
+男女只在sampleData每一個元素底下的第一個元素
 ```{r}
-
+# 前三筆性別
+sampleData[[1]][[1]]
+sampleData[[2]][[1]]
+sampleData[[3]][[1]]
 ```
+5.4.1 Iteration components
+
+我們在使用map時寫copy/paste程序3次，目的在確認：
+
+Sequence: 即[[1]], [[2]], [[3]]出現的位置。
+
+Body: 要重覆做的SOP，即~.x[[1]]。
+
+而map最後會把每次Body的執行結果存在：
+
+Output: 每次body執行完要存的形式，即map最後的list class output。
 
 ```{r}
 
