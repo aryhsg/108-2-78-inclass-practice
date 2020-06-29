@@ -3145,29 +3145,116 @@ toast_withEggHam <- function(toast=NULL, egg=NULL, ham=NULL){
 map(1:10,
     ~toast_withEggHam(toast=toast[[.x]], egg=eggs[[.x]], ham=ham[[.x]]))
 ```
+各系課程規劃
 
+執行以下程序可以得到臺北大學100-107學年的開課資料courseStructure：
 ```{r}
-
+jsonlite::fromJSON("https://www.dropbox.com/s/7myzzdnoor21hye/courseStructure2.json?dl=1") -> courseStructure
 ```
+一位剛入學的經濟系新生想大致了解他系上對他未來四年的課程規劃是什麼？於是他想先看一下過去狀況。
 
+以100學年入學之經濟系學生為對象，找出這群學生大一到大四的系上課程規劃是什麼？
 ```{r}
+entranceYear <- 100
+major <- "經濟系"
+allGrades <- paste0(major, 1:4)
+academicYears <- entranceYear+0:3
 
+# 100學年 1年級
+acadYear_i <- academicYears[[1]]
+grade_i <- allGrades[[1]]
+pick <-
+  (courseStructure$學年==acadYear_i 
+    &
+    str_detect(courseStructure$應修系級, grade_i))
+unique(courseStructure$科目名稱[pick])
+
+# 101學年 2年級
+acadYear_i <- academicYears[[2]]
+grade_i <- allGrades[[2]]
+pick <-
+  (courseStructure$學年==acadYear_i 
+    &
+    str_detect(courseStructure$應修系級, grade_i))
+unique(courseStructure$科目名稱[pick])
+
+# 102學年 3年級
+acadYear_i <- academicYears[[3]]
+grade_i <- allGrades[[3]]
+pick <-
+  (courseStructure$學年==acadYear_i 
+    &
+    str_detect(courseStructure$應修系級, grade_i))
+unique(courseStructure$科目名稱[pick])
+
+# 103學年 4年級
+acadYear_i <- academicYears[[4]]
+grade_i <- allGrades[[4]]
+pick <-
+  (courseStructure$學年==acadYear_i 
+    &
+    str_detect(courseStructure$應修系級, grade_i))
+unique(courseStructure$科目名稱[pick])
 ```
-
+100學年1年級-103學年4年級，有哪幾行是一模一樣的？
 ```{r}
-
+pick <-
+  (courseStructure$學年==acadYear_i 
+    &
+    str_detect(courseStructure$應修系級, grade_i))
+unique(courseStructure$科目名稱[pick])
 ```
+以上的SOP要能運作，哪些物件要存在執行環境？
+courseStructure, acadYear_i, grade_i
 
+將(A)(B)形成函數
 ```{r}
-
+get_courses <- function(acadYear_i, grade_i, courseStructure){
+  pick <-
+  (courseStructure$學年==acadYear_i 
+    &
+    str_detect(courseStructure$應修系級, grade_i))
+  
+  return(
+    unique(courseStructure$科目名稱[pick])
+  )
+}
 ```
-
+重寫100學年1年級-103學年4年級
 ```{r}
+# 100學年 1年級
+acadYear_i <- academicYears[[1]]
+grade_i <- allGrades[[1]]
+get_courses(acadYear_i, grade_i, courseStructure)
 
+# 101學年 2年級
+acadYear_i <- academicYears[[2]]
+grade_i <- allGrades[[2]]
+get_courses(acadYear_i, grade_i, courseStructure)
+
+# 102學年 3年級
+acadYear_i <- academicYears[[3]]
+grade_i <- allGrades[[3]]
+get_courses(acadYear_i, grade_i, courseStructure)
+
+# 103學年 4年級
+acadYear_i <- academicYears[[4]]
+grade_i <- allGrades[[4]]
+get_courses(acadYear_i, grade_i, courseStructure)
 ```
-
+濃縮
 ```{r}
+# 100學年 1年級
+get_courses(academicYears[[1]], allGrades[[1]], courseStructure)
 
+# 101學年 2年級
+get_courses(academicYears[[2]], allGrades[[2]], courseStructure)
+
+# 102學年 3年級
+get_courses(academicYears[[3]], allGrades[[3]], courseStructure)
+
+# 103學年 4年級
+get_courses(academicYears[[4]], allGrades[[4]], courseStructure)
 ```
 
 ```{r}
